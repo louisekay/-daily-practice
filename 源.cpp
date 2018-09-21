@@ -42,19 +42,16 @@ int circle_list_insert(Out *list, Out *t1)
 	t->num1 = t1->num1;//把传过来的信息拷贝到堆创建的结点中
 
 	//只有一个结点时
-	if (list->node.length = 0)
+	if (list->node.length == 0)
 	{
 		current->node.next = (In *)t;
 		list->node.length = 1;
-		t->node.next = NULL;
+		t->node.next = (In *)t;
 	}
 	else//多个结点时
 	{		
 		t->node.next = list->node.next;//作为最后一个结点，先保存开头结点
-		for (i = 0; i < list->node.length; i++)//再遍历到最后一个结点，连接插入的结点
-		{
-			current = (Out *)current->node.next;
-		}
+		for (current = list; current->node.next != list->node.next;current = (Out *)current->node.next);//再遍历到最后一个结点，连接插入的结点
 		current->node.next = (In *)t;
 		list->node.length++;
     }
@@ -93,16 +90,16 @@ int main()
 {
 	Out *list = circle_list_create();
 	Out t1,t2;
+	Out * current = list;
 	int i = 0;
 	t1.num1 = 1;
 	t2.num1 = 2;
 	circle_list_insert(list,&t1);
 	circle_list_insert(list, &t2);
 
-	for (i = 0; i < list->node.length; i++)
+	for (current = (Out *)list->node.next; current->node.next != list->node.next; current = (Out *)current->node.next)
 	{
-		printf("%d\n",list->num1);
-		list = (Out *)list->node.next;
+		printf("%d\n",(Out *)current->num1);		
 	}
 	circle_list_destroy(list);
 
