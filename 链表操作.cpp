@@ -17,7 +17,7 @@ typedef struct out
 }Out;
 
 
-Out * circle_list_create()//´´½¨Á´±í½áµã
+Out * circle_list_create()//åˆ›å»ºé“¾è¡¨ç»“ç‚¹
 {
 	Out * member = (Out *)malloc(sizeof(Out));
 	member->node.length = 0;
@@ -25,45 +25,45 @@ Out * circle_list_create()//´´½¨Á´±í½áµã
 	member->node.slider = 0;
 	return member;
 }
-//Î²²å·¨²åÈëÒ»¸ö½áµã
+//å°¾æ’æ³•æ’å…¥ä¸€ä¸ªç»“ç‚¹
 int circle_list_insert(Out *list, Out *t1)
 {
 	int i = 0;
 
 	if (list == NULL)
 	{
-		printf("circle_list_insert funtion´íÎó\n");
+		printf("circle_list_insert funtioné”™è¯¯\n");
 		return -1;
 	}
 
 
-	Out * current = list;//Ôİ´æÍ·½áµã£¬Ïàµ±ÓÚÖ¸±ê
+	Out * current = list;//æš‚å­˜å¤´ç»“ç‚¹ï¼Œç›¸å½“äºæŒ‡æ ‡
 	Out * t = (Out *)malloc(sizeof(Out));
-	t->num1 = t1->num1;//°Ñ´«¹ıÀ´µÄĞÅÏ¢¿½±´µ½¶Ñ´´½¨µÄ½áµãÖĞ
+	t->num1 = t1->num1;//æŠŠä¼ è¿‡æ¥çš„ä¿¡æ¯æ‹·è´åˆ°å †åˆ›å»ºçš„ç»“ç‚¹ä¸­
 
-	//Ö»ÓĞÒ»¸ö½áµãÊ±
+	//åªæœ‰ä¸€ä¸ªç»“ç‚¹æ—¶
 	if (list->node.length == 0)
 	{
 		current->node.next = (In *)t;
 		list->node.length = 1;
 		t->node.next = (In *)t;
 	}
-	else//¶à¸ö½áµãÊ±
+	else//å¤šä¸ªç»“ç‚¹æ—¶
 	{		
-		t->node.next = list->node.next;//×÷Îª×îºóÒ»¸ö½áµã£¬ÏÈ±£´æ¿ªÍ·½áµã
-		for (current = list; current->node.next != list->node.next;current = (Out *)current->node.next);//ÔÙ±éÀúµ½×îºóÒ»¸ö½áµã£¬Á¬½Ó²åÈëµÄ½áµã
+		t->node.next = list->node.next;//ä½œä¸ºæœ€åä¸€ä¸ªç»“ç‚¹ï¼Œå…ˆä¿å­˜å¼€å¤´ç»“ç‚¹
+		for (current = list; current->node.next != list->node.next;current = (Out *)current->node.next);//å†éå†åˆ°æœ€åä¸€ä¸ªç»“ç‚¹ï¼Œè¿æ¥æ’å…¥çš„ç»“ç‚¹
 		current->node.next = (In *)t;
 		list->node.length++;
     }
-/*Í·²å·¨
-	for (i = 0; i < list->node.length; i++)//ÕÒµ½×îºóÒ»¸ö½áµã
+/*å¤´æ’æ³•
+	for (i = 0; i < list->node.length; i++)//æ‰¾åˆ°æœ€åä¸€ä¸ªç»“ç‚¹
 	{
 		current->node.slider++;
 		current = (Out *)current->node.next;
 	}
-	current->node.next = (In *)t;//ÏÈ°Ñ×îºóÒ»¸ö¸ú²åÈëµÄ½áµãÁ¬½Ó
-	t->node.next = list->node.next;//È»ºó°Ñ²åÈëµÄ½áµã¸úÍ·½áµãÁ¬ÆğÀ´
-	list->node.next = (In *)t;//×îºó²ÅÈÃÍ·½áµã±£´æ²åÈë½áµãµÄµØÖ·
+	current->node.next = (In *)t;//å…ˆæŠŠæœ€åä¸€ä¸ªè·Ÿæ’å…¥çš„ç»“ç‚¹è¿æ¥
+	t->node.next = list->node.next;//ç„¶åæŠŠæ’å…¥çš„ç»“ç‚¹è·Ÿå¤´ç»“ç‚¹è¿èµ·æ¥
+	list->node.next = (In *)t;//æœ€åæ‰è®©å¤´ç»“ç‚¹ä¿å­˜æ’å…¥ç»“ç‚¹çš„åœ°å€
 */
 	return 0;
 }
@@ -74,7 +74,7 @@ int circle_list_destroy(Out *list)
 	Out * current = NULL;
 	if (list == NULL)
 	{
-		printf("circle_list_destroy funtion´íÎó\n");
+		printf("circle_list_destroy funtioné”™è¯¯\n");
 		return -1;
 	}
 
