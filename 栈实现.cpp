@@ -5,6 +5,7 @@
 typedef struct listnode//保存下一位的指针
 {
 	struct listnode * next;
+	int length;
 }Listnode;
 
 typedef struct big
@@ -17,8 +18,7 @@ Big * stack_create(int capacity)//创建头结点，item保存容量大小
 {
 	Big * stack = (Big *)malloc(sizeof(Big));
 	stack->node.next = NULL;
-	stack->item = (void *)malloc(sizeof(int));
-	*((int *)stack->item) = capacity;
+	stack->node.length = capacity;
 	return stack;
 }
 
@@ -31,8 +31,7 @@ void stack_destroy(Big * stack)//删除栈的空间
 	}
 	while (stack != NULL)
 	{
-		p = (Big *)stack->node.next;
-		free(stack->item);//分配了两次就要free两次
+		p = (Big *)stack->node.next;		
 		free(stack);
 		stack = p;
 	}
@@ -50,7 +49,6 @@ void stack_clear(Big * stack)//只剩头结点
 	while (p != NULL)//只删除头结点外的空间
 	{
 		p1 = (Big *)stack->node.next;
-		free(p->item);
 		free(p);
 		p = p1;
 	}
@@ -60,7 +58,7 @@ void stack_clear(Big * stack)//只剩头结点
 
 int stack_push(Big * stack, void * item)//入栈
 {
-	if (*((int *)stack->item) == 0)
+	if (stack->node.length == 0)
 	{
 		printf("栈空间不足，插入失败！\n");
 		return -1;
@@ -72,7 +70,7 @@ int stack_push(Big * stack, void * item)//入栈
 	stack->node.next = (Listnode *)b1;
 	//再把item保存的指针放进去b1的item
 	b1->item = item;
-	*((int *)stack->item) = *((int *)stack->item) - 1;//减一是指空间减一
+	stack->node.length--;//减一是指空间减一
 	return 0;
 }
 
@@ -83,16 +81,32 @@ void * stack_pop(Big * stack)
 		printf("栈空，无法弹出！\n");
 		return NULL;
 	}
+	void * item;
     Big * p = (Big *)stack->node.next;
+	item = p->item;
 	stack->node.next = p->node.next;
 	free(p);
-	//还要freeitem指向的空间
-	return NULL;
+	return item;
 }
 
 int main()
 {
 	Big * s1 = stack_create(10);
+	int i = 0;
+	int a[4] = {0};
+	for (i = 0; i < 4; i++)
+	{
+		a[i] = i + 1;
+	}
+	stack_push(s1, (void *)a[0]);//入栈
+	stack_push(s1, (void *)a[1]);
+	stack_push(s1, (void *)a[2]);
+	stack_push(s1, (void *)a[3]);
+
+	for (i = 0; i < 4; i++)
+	{
+		printf("%d\n", (int *)stack_pop(s1));
+	}
 
 	system("pause");
 	return 0;
