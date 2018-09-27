@@ -95,40 +95,40 @@ int match(Stack * s1,char a)
 	{
 		case ')':
 		{
-			char * c = (char *)stack_pop(s1);
-			if ( *c == '(')
+			char  c = (char )stack_pop(s1);
+			if ( c == '(')
 			{
 				return 0;
 			}
 			break;
 		}
 		case ']':
-		{   char * c = (char *)stack_pop(s1);
-		    if (*c == '[')
+		{   char  c = (char )stack_pop(s1);
+		    if (c == '[')
 			{
 				return 0;
 			}
 			break;
 		}
 		case '}':
-		{   char * c = (char *)stack_pop(s1);
-		    if (*c == '}')
+		{  char  c = (char)stack_pop(s1);
+		    if (c == '}')
 			{
 				return 0;
 			}
 			break;
 		}
 		case '\'':
-		{   char * c = (char *)stack_pop(s1);
-		    if (*c == '\'')
+		{   char  c = (char)stack_pop(s1);
+		    if (c == '\'')
 			{
 				return 0;
 			}
 			break;
 		}
 		case '\"':
-		{   char * c = (char *)stack_pop(s1);
-		    if (*c == '\"')
+		{   char  c = (char)stack_pop(s1);
+		    if (c == '\"')
 			{
 				return 0;
 			}
