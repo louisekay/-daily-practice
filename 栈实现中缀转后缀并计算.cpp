@@ -163,7 +163,11 @@ char * trans(Big * s1,char a[20],char b[20])
 	return NULL;
 }
 
-int  calculate(Big * s1, char b[20])
+
+
+
+//这里的char与int之间转换太傻逼了，必须改掉。。。。这个单独写
+int   calculate1(Big * s1, char b[20])
 {
 	
 	//遇到运算符则栈顶元素做右操作数，第二个元素做左操作数，运算结果入栈
@@ -171,7 +175,7 @@ int  calculate(Big * s1, char b[20])
 	while (b[i] != '\0')
 	{
 		//遇到数字全入栈
-		if (b[i] != '+' || b[i] != '-' || b[i] != '*' || b[i] != '/')
+		if (b[i] != '+' && b[i] != '-' && b[i] != '*' && b[i] != '/')
 		{
 			stack_push(s1, (void *)b[i]);
 			i++;
@@ -182,31 +186,41 @@ int  calculate(Big * s1, char b[20])
 			switch (b[i])
 			{
 			case '+': {
-				int right = (int)stack_pop(s1);
-				int left = (int)stack_pop(s1);
-				stack_push(s1, (void *)(left + right));
+				int right = (char)stack_pop(s1) - '0';
+				int left = (char)stack_pop(s1) - '0';//char - '0'会变成整型
+				char res = left + right + '0';//整型转回char
+				stack_push(s1, (void *)(res));
+				break;
 			}
 			case '-': {
-				int right = (int)stack_pop(s1);
-				int left = (int)stack_pop(s1);
-				stack_push(s1, (void *)(left - right));
+				int right = (char)stack_pop(s1) - '0';
+				int left = (char)stack_pop(s1) - '0';
+				char res = left - right + '0';
+				stack_push(s1, (void *)(res));
+				break;
 			}
 			case '*': {
-				int right = (int)stack_pop(s1);
-				int left = (int)stack_pop(s1);
-				stack_push(s1, (void *)(left * right));
+				int right = (char)stack_pop(s1) - '0';
+				int left = (char)stack_pop(s1) - '0';
+				char res = left * right + '0';
+				stack_push(s1, (void *)(res));
+				break;
 			}
 			case '/': {
-				int right = (int)stack_pop(s1);
-				int left = (int)stack_pop(s1);
-				stack_push(s1, (void *)(left / right));
+				int right = (char)stack_pop(s1) - '0';
+				int left = (char)stack_pop(s1) - '0';
+				char res = left / right + '0';
+				stack_push(s1, (void *)(res));
+				break;
 			}
 			}
+			i++;
+			continue;
 		}
 		i++;
 	}
 
-	return (int)stack_pop(s1);
+	return ((int)stack_pop(s1) - '0');
 }
 
 int main()
@@ -218,7 +232,7 @@ int main()
 	trans(s1,a,b);
     printf("%s\n",b);
 
-	int result = (int)calculate(s1,b);
+	int result = calculate1(s1,b);
 
 	printf("%d\n", result);
 	
