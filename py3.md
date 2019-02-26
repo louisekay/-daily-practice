@@ -29,7 +29,7 @@ py不用声明类型，但是必须要赋初值
      int,float,bool,complex(复数)
      多了一个乘方符 '**' 
      
-     除法/返回一个浮点数，除法//返回一个整数
+     除法/返回一个浮点数，除法//向下整除
      
 (list)列表：[1,"ada",["da"]]
     用[]括起来，字符串的截取和加乘在list也可以用
@@ -47,5 +47,24 @@ py不用声明类型，但是必须要赋初值
 (dictionary)字典：{'name': 'runoob', 'code': 1, 'site': 'www.runoob.com'}
     无序
     通过key来存取，用：或者=来关联
+    
+and,or,not：与或非
+
+in,not in：是否在
+
+is，is not：判断是否指向同一个内存区
 
 import 与 from...import用法：
+
+while可跟else一起用（while不成立会循环else代码块）
+
+for：
+    for循环可以遍历任何序列的项目，如一个列表或者一个字符串
+    for 变量 in 域（按下标遍历）
+    
+迭代器：
+    有两个基本的方法：iter() 和 next()（先创建再用）
+    ist=[1,2,3,4]
+    it = iter(list)    # 创建迭代器对象
+    print (next(it))   # 输出迭代器的下一个元素
+    只能往前不能往后
